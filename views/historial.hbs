@@ -1,0 +1,39 @@
+{{#if usuario}}
+  {{{body}}} <!-- Mostrar el contenido de la vista si hay un usuario autenticado -->
+{{else}}
+  <main>
+    <form id="loginForm" action="/login" method="POST"> 
+      <div class="mb-3">
+        <label for="usrname" class="form-label">Nombre de usuario</label>
+        <input type="text" class="form-control" id="usrname" name="username" required>
+      </div>
+      <div class="mb-3">
+        <label for="usrPassword" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="usrPassword" name="userPassword" required>
+      </div>
+      <button type="submit" class="btn btn-primary" form="loginForm">Iniciar sesión</button>
+    </form>
+  </main>
+{{/if}}
+
+<p class="fs-3"> Bienvenido al historial de compras querido {{usuario}} </p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Fecha</th>
+      <th scope="col">Producto</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Precio</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>2024-02-07</td>
+      <td>Café americano</td>
+      <td>2</td>
+      <td>$5.00</td>
+    </tr>
+  </tbody>
+  
+</table>

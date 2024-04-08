@@ -1,17 +1,40 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
+var cookieParser = require('cookie-parser'); 
 var logger = require('morgan');
+const bodyParser = require('body-parser');
+const expressSession = require('express-session');
+const uuid = require('uuid');
+const bcrypt = require('bcrypt');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var loginRouter = require('./routes/login');
+var carritoRouter = require('./routes/carrito');
 
 var app = express();
 
-// view engine setup
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Generar un identificador único
+const peach = uuid.v4();
+
+// Cifrar el identificador de sesión
+const toad = bcrypt.hashSync(peach, 10);
+
+app.use(expressSession({
+  secret: toad, 
+  resave: true, 
+  saveUninitialized: false, 
+  cookie: { secure: false }
+}));
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+app.set('view options', { layout: 'main' });
+
+app.disable('etag');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -20,20 +43,18 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/login', loginRouter);
+app.use('/carrito', carritoRouter);
 
-// catch 404 and forward to error handler
+//Error 404
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
+//Error 500
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });

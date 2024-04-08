@@ -1,0 +1,30 @@
+<p class="fs-3">Listado de productos</p>
+<table class="table">
+  <thead>
+    <tr class="table-info">
+      <th scope="col">Producto</th>
+      <th scope="col">Precio(RD$)</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Agregar</th>
+    </tr>
+  </thead>
+ 
+  <tbody>
+    {{#each productos}}
+    <tr>
+      <td>{{this.producto}}</td>
+      <td>{{this.precio}}</td>
+    <td>
+      <form action="/carrito/agregar-al-carrito" method="POST">
+        <input type="number" name="cantidad" min="1" value="1">
+        <input type="hidden" name="productId" value="{{this.id}}">
+    </td>
+    <td>
+        <button type="submit" class="btn btn-success">Agregar al carrito</button>
+      </form>
+    </td>
+    </tr>
+    {{/each}}
+  </tbody>
+
+</table>

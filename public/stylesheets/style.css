@@ -1,8 +1,22 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.navbar-custom {
+  background-color: #8A2BE2;
 }
 
-a {
-  color: #00B7FF;
+.btn-custom{
+  background-color: #8A2BE2;
+  color: #ffffff;
+}
+
+footer {
+  background-color: #8A2BE2;
+  padding: 15px 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  color: white;
+}
+
+#loginForm {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }

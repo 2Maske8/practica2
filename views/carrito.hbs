@@ -1,0 +1,20 @@
+<p class="fs-3">Productos en el carrito</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Producto</th>
+      <th scope="col">Precio(RD$)</th>
+      <th scope="col">Cantidad</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each carrito}}
+    <tr>
+      <td>{{this.producto.producto}}</td>
+      <td>{{this.producto.precio}}</td>
+      <td>{{this.cantidad}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+<a href="/listas" class="btn btn-primary">Volver a la lista de productos</a>
